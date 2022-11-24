@@ -12,6 +12,6 @@ export default {
 
 <style>
 *{
-  background-color: #FFFFFF;
+  background-color: transparent;
 }
 </style>
