@@ -3,14 +3,14 @@
     <div class="flex flex-col justify-center">
       <h1 class="text-4xl mb-5">Welcome to Prospera</h1>
       <div class="p-3 border border-black rounded-lg">
-        <form autocomplete="off">
+        <form @submit.prevent="loginUser">
           <div class="mb-2">
             <p class="text-lg">Email</p>
             <input
               type="text"
               name="email"
               class="border-b-2 border-[#1B1A17] p-1 w-full focus:outline-none"
-              autocomplete="false"
+              v-model="loginForm.email"
             />
           </div>
           <div class="mb-4">
@@ -19,24 +19,53 @@
               type="password"
               name="password"
               class="border-b-2 border-[#1B1A17] p-1 w-full focus:outline-none"
+              v-model="loginForm.password"
             />
           </div>
-          <input
-            type="button"
-            value="Login"
+          <button
+            type="submit"
             class="text-center text-xl border border-black p-1 rounded w-full"
-          />
+          >Login</button>
         </form>
       </div>
       <div class="flex justify-center relative top-20">
-        <img src="../assets/logo_btpns.png" alt="Logo BTPN Syariah" class="w-[115px] h-[64px]" />
+        <img
+          src="../assets/logo_btpns.png"
+          alt="Logo BTPN Syariah"
+          class="w-[115px] h-[64px]"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "LoginPage",
+  data() {
+    return {
+      loginForm: {
+        email: "",
+        password: ""
+      }
+    }
+  },
+  methods: {
+    loginUser() {
+      axios
+        .post("http://localhost:8080/login", {
+          email: this.loginForm.email,
+          password: this.loginForm.password,
+        })
+        .then((res) => {
+          localStorage.setItem("nama", res.data.payload.nama);
+          this.$router.push('/');
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    },
+  },
 };
 </script>

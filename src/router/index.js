@@ -1,8 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import LoginPage from "../views/LoginPage.vue";
 import NotFoundPage from "../views/NotFoundPage.vue";
+import LoginPage from "../views/LoginPage.vue";
 import HomePage from "../views/HomePage.vue";
+import AllBranchOfficer from "../views/AllBranchOfficer.vue";
+import AllLoans from "../views/AllLoans.vue";
+import AllSavings from '../views/AllSavings.vue';
+import AllCustomers from "../views/AllCustomers.vue";
+import AddNewBranchOfficer from "../views/AddNewBranchOfficer.vue";
+import AddNewLoans from "../views/AddNewLoans.vue";
+import AddNewCustomers from "../views/AddNewCustomers.vue";
 
 Vue.use(VueRouter);
 
@@ -14,10 +21,52 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/branch-officer",
+    name: "branch-officer",
+    component: AllBranchOfficer,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/loans",
+    name: "loans",
+    component: AllLoans,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/savings",
+    name: "savings",
+    component: AllSavings,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/customers",
+    name: "customers",
+    component: AllCustomers,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/add-new-branch-officer",
+    name: "addNewBranchOfficer",
+    component: AddNewBranchOfficer,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/add-new-loans",
+    name: "addNewLoans",
+    component: AddNewLoans,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/add-new-customers",
+    name: "addNewCustomers",
+    component: AddNewCustomers,
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/login",
     name: "login",
     component: LoginPage,
-    meta: { requiresAuth: false },
+    meta: { alreadyLogged: true },
   },
   {
     path: "*",
