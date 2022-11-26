@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   name: "LoginPage",
@@ -54,17 +53,10 @@ export default {
   },
   methods: {
     loginUser() {
-      axios
-        .post("http://localhost:8080/login", {
-          email: this.loginForm.email,
-          password: this.loginForm.password,
-        })
-        .then((res) => {
-          localStorage.setItem("nama", res.data.payload.nama);
-          this.$router.push('/');
-          console.log(res);
-        })
-        .catch((err) => console.log(err));
+      this.$store.dispatch("loginUser", {
+        email: this.loginForm.email,
+        password: this.loginForm.password
+      });
     },
   },
 };

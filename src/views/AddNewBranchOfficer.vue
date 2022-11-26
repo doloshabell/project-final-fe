@@ -4,7 +4,7 @@
       <h1 class="font-semibold text-xl">Add New Branch Officer</h1>
     </div>
     <div class="mt-6">
-      <form>
+      <form @submit.prevent="addNewBranchOfficer">
         <div class="grid grid-cols-2 gap-4">
           <div class="mb-2 mr-4">
             <p class="mb-1 text-base">Nama</p>
@@ -12,6 +12,7 @@
               type="text"
               name="email"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
+              v-model="formAddNewBranchOfficer.nama"
             />
           </div>
           <div class="mb-2">
@@ -20,6 +21,7 @@
               type="text"
               name="nik"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
+              v-model="formAddNewBranchOfficer.nikKtp"
             />
           </div>
           <div class="mb-2 mr-4">
@@ -28,14 +30,16 @@
               type="password"
               name="password"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
+              v-model="formAddNewBranchOfficer.password"
             />
           </div>
           <div class="mb-2">
             <p class="mb-1 text-base">Tanggal Lahir</p>
             <input
-              type="text"
+              type="date"
               name="tanggalLahir"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
+              v-model="formAddNewBranchOfficer.tanggalLahir"
             />
           </div>
           <div class="mb-2 mr-4">
@@ -44,6 +48,7 @@
               type="text"
               name="tempatLahir"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
+              v-model="formAddNewBranchOfficer.tempatLahir"
             />
           </div>
           <div class="mb-2">
@@ -52,14 +57,7 @@
               type="text"
               name="alamat"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
-            />
-          </div>
-          <div class="mb-2 mr-4">
-            <p class="mb-1 text-base">Agama</p>
-            <input
-              type="text"
-              name="agama"
-              class="ml-[3px] rounded-sm p-[2px] w-full outline"
+              v-model="formAddNewBranchOfficer.alamat"
             />
           </div>
           <div class="mb-2">
@@ -68,6 +66,7 @@
               type="text"
               name="jabatan"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
+              v-model="formAddNewBranchOfficer.jabatan"
             />
           </div>
           <div class="mb-2 mr-4">
@@ -76,26 +75,11 @@
               type="text"
               name="cabang"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
-            />
-          </div>
-          <div class="mb-2">
-            <p class="mb-1 text-base">Jenis Kelamin</p>
-            <input
-              type="text"
-              name="jenisKelamin"
-              class="ml-[3px] rounded-sm p-[2px] w-full outline"
-            />
-          </div>
-          <div class="mb-4 mr-4">
-            <p class="mb-1 text-base">Status</p>
-            <input
-              type="text"
-              name="status"
-              class="ml-[3px] rounded-sm p-[2px] w-full outline"
+              v-model="formAddNewBranchOfficer.cabang"
             />
           </div>
         </div>
-        <div class="flex justify-center">
+        <div class="flex justify-center mt-4">
           <button
             type="submit"
             class="text-center text-lg bg-[#FF8000] text-white p-1 rounded w-4/5 hover:bg-[#D06800]"
@@ -111,5 +95,16 @@
 <script>
 export default {
   name: "AddNewBranchOfficer",
+  computed: {
+    formAddNewBranchOfficer() {
+      return this.$store.state.formAddNewBranchOfficer;
+    }
+  },
+  methods: {
+    addNewBranchOfficer() {
+      this.$store.dispatch("addNewBranchOfficer");
+      this.$router.push("/branch-officer");
+    }
+  }
 };
 </script>

@@ -5,18 +5,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 
 export default {
   name: "HomePage", 
-  created() {
-    axios
-      .get("http://192.168.100.7:8080/api/officer")
-      .then(({ data }) => {
-        console.log(data.payload);
-      })
-      .catch((err) => alert(err));
-  }
 };
 </script>

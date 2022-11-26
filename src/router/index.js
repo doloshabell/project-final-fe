@@ -10,6 +10,8 @@ import AllCustomers from "../views/AllCustomers.vue";
 import AddNewBranchOfficer from "../views/AddNewBranchOfficer.vue";
 import AddNewLoans from "../views/AddNewLoans.vue";
 import AddNewCustomers from "../views/AddNewCustomers.vue";
+import DetailBranchOfficer from '../views/DetailBranchOfficer.vue';
+import DetailCustomer from '../views/DetailCustomer.vue';
 
 Vue.use(VueRouter);
 
@@ -61,6 +63,18 @@ const routes = [
     name: "addNewCustomers",
     component: AddNewCustomers,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/branch-officer/:id",
+    name: "detailBranchOfficer",
+    component: DetailBranchOfficer,
+    meta: {requiresAuth: true},
+  },
+  {
+    path: "/customers/:id",
+    name: "detailCustomer",
+    component: DetailCustomer,
+    meta: {requiresAuth: true},
   },
   {
     path: "/login",
