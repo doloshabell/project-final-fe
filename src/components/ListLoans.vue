@@ -4,7 +4,7 @@
   >
     <div class="w-1/3">
       <h1 class="text-lg font-semibold">{{ loan.nama }}</h1>
-      <span class="text-base text-gray-800">{{ loan.nikKtp }}</span>
+      <span class="text-base text-gray-800">{{ loan.noPembiayaan }}</span>
     </div>
     <div class="text-center w-1/3">
       <h1 class="text-lg font-semibold">

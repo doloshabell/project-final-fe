@@ -11,6 +11,7 @@
               name="email"
               class="border-b-2 border-[#1B1A17] p-1 w-full focus:outline-none"
               v-model="loginForm.email"
+              required
             />
           </div>
           <div class="mb-4">
@@ -20,6 +21,7 @@
               name="password"
               class="border-b-2 border-[#1B1A17] p-1 w-full focus:outline-none"
               v-model="loginForm.password"
+              required
             />
           </div>
           <button
