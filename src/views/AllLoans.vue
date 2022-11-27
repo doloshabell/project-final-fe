@@ -7,7 +7,7 @@
           <button
             class="p-2 rounded-md font-normal text-base text-white bg-[#FF8000] hover:bg-[#D06800]"
           >
-            <font-awesome-icon icon="fa-solid fa-plus" />
+            <font-awesome-icon icon="fa-solid fa-plus" class="mr-1" />
             Add New Loan
           </button>
         </router-link>

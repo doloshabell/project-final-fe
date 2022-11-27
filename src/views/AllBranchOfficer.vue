@@ -7,13 +7,13 @@
           <button
             class="p-2 rounded-md font-normal text-base text-white bg-[#FF8000] hover:bg-[#D06800]"
           >
-            <font-awesome-icon icon="fa-solid fa-plus" />
+            <font-awesome-icon icon="fa-solid fa-plus" class="mr-1" />
             Add New Branch Officer
           </button>
         </router-link>
       </div>
       <div>
-        <div @click="goToDetailBranchOfficer(officer.id)" v-for="officer in getAllBranchOfficersData" :key="officer.id">
+        <div @click="goToDetailBranchOfficer(officer.nikKaryawan)" v-for="officer in getAllBranchOfficersData" :key="officer.id">
           <ListBranchOfficer :officer="officer" />
         </div>
       </div>
@@ -35,8 +35,9 @@ export default {
     this.$store.dispatch("getAllBranchOfficers");
   },
   methods: {
-    goToDetailBranchOfficer(id) {
-      this.$router.push(`/branch-officer/${id}`);
+    goToDetailBranchOfficer(nikKaryawan) {
+      this.$router.push(`/branch-officer/detail`);
+      this.$store.dispatch("getDetailBranchOfficer", nikKaryawan);
     }
   }
 };

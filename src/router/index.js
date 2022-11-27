@@ -12,6 +12,8 @@ import AddNewLoans from "../views/AddNewLoans.vue";
 import AddNewCustomers from "../views/AddNewCustomers.vue";
 import DetailBranchOfficer from '../views/DetailBranchOfficer.vue';
 import DetailCustomer from '../views/DetailCustomer.vue';
+import UpdateBranchOfficer from '../views/UpdateBranchOfficer.vue';
+import UpdateCustomer from '../views/UpdateCustomer.vue';
 
 Vue.use(VueRouter);
 
@@ -65,15 +67,27 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/branch-officer/:id",
+    path: "/branch-officer/detail",
     name: "detailBranchOfficer",
     component: DetailBranchOfficer,
     meta: {requiresAuth: true},
   },
   {
-    path: "/customers/:id",
+    path: "/customers/detail",
     name: "detailCustomer",
     component: DetailCustomer,
+    meta: {requiresAuth: true},
+  },
+  {
+    path: "/branch-officer/update",
+    name: "updateBranchOfficer",
+    component: UpdateBranchOfficer,
+    meta: {requiresAuth: true},
+  },
+  {
+    path: "/customers/update",
+    name: "updateCustomer",
+    component: UpdateCustomer,
     meta: {requiresAuth: true},
   },
   {

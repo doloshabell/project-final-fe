@@ -60,7 +60,7 @@
               v-model="formAddNewBranchOfficer.alamat"
             />
           </div>
-          <div class="mb-2">
+          <div class="mb-2 mr-4">
             <p class="mb-1 text-base">Jabatan</p>
             <input
               type="text"
@@ -69,7 +69,7 @@
               v-model="formAddNewBranchOfficer.jabatan"
             />
           </div>
-          <div class="mb-2 mr-4">
+          <div class="mb-2">
             <p class="mb-1 text-base">Cabang</p>
             <input
               type="text"
@@ -84,7 +84,7 @@
             type="submit"
             class="text-center text-lg bg-[#FF8000] text-white p-1 rounded w-4/5 hover:bg-[#D06800]"
           >
-            Add Data
+            Add Data Branch Officer
           </button>
         </div>
       </form>

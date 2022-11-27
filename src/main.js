@@ -5,9 +5,9 @@ import router from './router';
 import store from './store';
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faWrench } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faPlus);
+library.add(faPlus, faWrench);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
 

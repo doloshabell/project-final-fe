@@ -1,18 +1,18 @@
 <template>
   <div class="pl-5 pr-14">
     <div class="mt-4">
-      <h1 class="font-semibold text-xl">Add New Customer</h1>
+      <h1 class="font-semibold text-xl">Update Branch Officer</h1>
     </div>
     <div class="mt-6">
-      <form @submit.prevent="addNewCustomer">
+      <form @submit.prevent="submitUpdateBranchOfficer">
         <div class="grid grid-cols-2 gap-4">
           <div class="mb-2 mr-4">
             <p class="mb-1 text-base">Nama</p>
             <input
               type="text"
-              name="email"
+              name="nama"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
-              v-model="formAddNewCustomer.nama"
+              v-model="formUpdateBranchOfficer.nama"
             />
           </div>
           <div class="mb-2">
@@ -21,70 +21,70 @@
               type="text"
               name="nik"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
-              v-model="formAddNewCustomer.nikKtp"
+              v-model="formUpdateBranchOfficer.nikKtp"
             />
           </div>
           <div class="mb-2 mr-4">
-            <p class="mb-1 text-base">Email</p>
+            <p class="mb-1 text-base">Nomor Induk Karyawan</p>
             <input
               type="text"
-              name="email"
+              name="nikKaryawan"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
-              v-model="formAddNewCustomer.email"
+              v-model="formUpdateBranchOfficer.nikKaryawan"
             />
           </div>
           <div class="mb-2">
-            <p class="mb-1 text-base">Password</p>
+            <p class="mb-1 text-base">Tanggal Lahir</p>
             <input
-              type="password"
-              name="password"
+              type="date"
+              name="tanggalLahir"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
-              v-model="formAddNewCustomer.password"
+              v-model="formUpdateBranchOfficer.tanggalLahir"
             />
           </div>
           <div class="mb-2 mr-4">
-            <p class="mb-1 text-base">No Handphone</p>
+            <p class="mb-1 text-base">Tempat Lahir</p>
             <input
               type="text"
-              name="noHandphone"
+              name="tempatLahir"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
-              v-model="formAddNewCustomer.noHP"
+              v-model="formUpdateBranchOfficer.tempatLahir"
             />
           </div>
           <div class="mb-2">
-            <p class="mb-1 text-base">Pekerjaan</p>
-            <input
-              type="text"
-              name="pekerjaan"
-              class="ml-[3px] rounded-sm p-[2px] w-full outline"
-              v-model="formAddNewCustomer.pekerjaan"
-            />
-          </div>
-          <div class="mb-2 mr-4">
             <p class="mb-1 text-base">Alamat</p>
             <input
               type="text"
               name="alamat"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
-              v-model="formAddNewCustomer.alamat"
+              v-model="formUpdateBranchOfficer.alamat"
             />
           </div>
-          <div class="mb-4">
-            <p class="mb-1 text-base">Agen Warung Tepat?</p>
+          <div class="mb-2 mr-4">
+            <p class="mb-1 text-base">Jabatan</p>
             <input
               type="text"
-              name="agen"
+              name="jabatan"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
-              v-model="formAddNewCustomer.flagWarungTepat"
+              v-model="formUpdateBranchOfficer.jabatan"
+            />
+          </div>
+          <div class="mb-2">
+            <p class="mb-1 text-base">Cabang</p>
+            <input
+              type="text"
+              name="cabang"
+              class="ml-[3px] rounded-sm p-[2px] w-full outline"
+              v-model="formUpdateBranchOfficer.cabang"
             />
           </div>
         </div>
-        <div class="flex justify-center">
+        <div class="flex justify-center mt-4">
           <button
             type="submit"
             class="text-center text-lg bg-[#FF8000] text-white p-1 rounded w-4/5 hover:bg-[#D06800]"
           >
-            Add Data Customer
+            Update Data Branch Officer
           </button>
         </div>
       </form>
@@ -94,17 +94,17 @@
 
 <script>
 export default {
-  name: "AddNewCustomers",
+  name: "UpdateBranchOfficer",
   computed: {
-    formAddNewCustomer() {
-      return this.$store.state.formAddNewCustomer;
-    }
+    formUpdateBranchOfficer() {
+      return this.$store.state.formUpdateBranchOfficer;
+    },
   },
   methods: {
-    addNewCustomer() {
-      this.$store.dispatch("addNewCustomer");
-      this.$router.push("/customers")
-    }
-  }
+    submitUpdateBranchOfficer() {
+      this.$store.dispatch("updateBranchOfficer");
+      this.$router.push("/branch-officer");
+    },
+  },
 };
 </script>

@@ -4,6 +4,7 @@ import VuexPersistence from "vuex-persist";
 import localForage from "localforage";
 import router from "@/router";
 import axios from "axios";
+import baseUrlAPI from "@/api";
 
 const vuexLocal = new VuexPersistence({
   storage: localForage,
@@ -47,10 +48,36 @@ const store = new Vuex.Store({
       tenor: "",
       nikKtp: "",
     },
+    formUpdateBranchOfficer: {
+      id: "",
+      nikKaryawan: "",
+      nikKtp: "",
+      nama: "",
+      tanggalLahir: "",
+      tempatLahir: "",
+      alamat: "",
+      jabatan: "",
+      cabang: "",
+      status: "",
+    },
+    formUpdateCustomer: {
+      id: "",
+      nama: "",
+      nikKtp: "",
+      email: "",
+      password: "",
+      noHP: "",
+      pekerjaan: "",
+      alamat: "",
+      flagWarungTepat: "",
+      tanggalBuat: "",
+    },
     allBranchOfficers: [],
     allLoans: [],
     allSavings: [],
     allCustomers: [],
+    detailBranchOfficer: {},
+    detailCustomer: {},
   },
   mutations: {
     SET_USER_DATA(state, payload) {
@@ -89,6 +116,18 @@ const store = new Vuex.Store({
     SET_FORM_ADD_NEW_CUSTOMER(state, payload) {
       state.formAddNewCustomer = payload;
     },
+    SET_FORM_UPDATE_BRANCH_OFFICER(state, payload) {
+      state.formUpdateBranchOfficer = payload;
+    },
+    SET_FORM_UPDATE_CUSTOMER(state, payload) {
+      state.formUpdateCustomer = payload;
+    },
+    SET_DETAIL_BRANCH_OFFICER(state, payload) {
+      state.detailBranchOfficer = payload;
+    },
+    SET_DETAIL_CUSTOMER(state, payload) {
+      state.detailCustomer = payload;
+    },
     ADD_NEW_BRANCH_OFFICER_DATA(state, payload) {
       state.allBranchOfficers.push(payload);
     },
@@ -102,7 +141,7 @@ const store = new Vuex.Store({
   actions: {
     loginUser({ commit }, data) {
       axios
-        .post("http://localhost:8080/login", data)
+        .post(`${baseUrlAPI}/login`, data)
         .then(({ data, status }) => {
           if (status === 200) {
             localStorage.setItem("nama", data.payload.nama);
@@ -122,16 +161,12 @@ const store = new Vuex.Store({
       commit("SET_USER_DATA", {
         nama: "",
         hak: "",
-        allBranchOfficers: [],
-        allLoans: [],
-        allSavings: [],
-        allCustomers: [],
       });
       router.push("/login");
     },
     getAllBranchOfficers({ commit }) {
       axios
-        .get("http://localhost:8080/api/officer")
+        .get(`${baseUrlAPI}/api/officer/all`)
         .then(({ data, status }) => {
           if (status === 200) {
             commit("SET_ALL_BRANCH_OFFICERS_DATA", data.payload);
@@ -141,7 +176,7 @@ const store = new Vuex.Store({
     },
     getAllLoans({ commit }) {
       axios
-        .get("http://localhost:8080/api/pembiayaan")
+        .get(`${baseUrlAPI}/api/pembiayaan/all`)
         .then(({ data, status }) => {
           if (status === 200) {
             commit("SET_ALL_LOANS_DATA", data.payload);
@@ -151,7 +186,7 @@ const store = new Vuex.Store({
     },
     getAllSavings({ commit }) {
       axios
-        .get("http://localhost:8080/api/tabungan")
+        .get(`${baseUrlAPI}/api/tabungan/all`)
         .then(({ data, status }) => {
           if (status === 200) {
             commit("SET_ALL_SAVINGS_DATA", data.payload);
@@ -161,7 +196,7 @@ const store = new Vuex.Store({
     },
     getAllCustomers({ commit }) {
       axios
-        .get("http://localhost:8080/api/nasabah")
+        .get(`${baseUrlAPI}/api/nasabah/all`)
         .then(({ data, status }) => {
           if (status === 200) {
             commit("SET_ALL_CUSTOMERS_DATA", data.payload);
@@ -169,12 +204,25 @@ const store = new Vuex.Store({
         })
         .catch((err) => console.log(err));
     },
+    getDetailBranchOfficer({ commit }, nikKaryawan) {
+      axios
+        .get(`${baseUrlAPI}/api/officer/${nikKaryawan}`)
+        .then(({ data }) => {
+          commit("SET_DETAIL_BRANCH_OFFICER", data.payload);
+        })
+        .catch((err) => console.log(err));
+    },
+    getDetailCustomer({ commit }, nikKtp) {
+      axios
+        .get(`${baseUrlAPI}/api/nasabah/${nikKtp}`)
+        .then(({ data }) => {
+          commit("SET_DETAIL_CUSTOMER", data.payload);
+        })
+        .catch((err) => console.log(err));
+    },
     addNewBranchOfficer({ commit, state }) {
       axios
-        .post(
-          "http://localhost:8080/api/officer",
-          state.formAddNewBranchOfficer
-        )
+        .post(`${baseUrlAPI}/api/officer/create`, state.formAddNewBranchOfficer)
         .then(({ data }) => {
           commit("ADD_NEW_BRANCH_OFFICER_DATA", data.payload);
           commit("SET_FORM_ADD_NEW_BRANCH_OFFICER", {
@@ -192,7 +240,7 @@ const store = new Vuex.Store({
     },
     addNewCustomer({ commit, state }) {
       axios
-        .post("http://localhost:8080/api/nasabah", state.formAddNewCustomer)
+        .post(`${baseUrlAPI}/api/nasabah/create`, state.formAddNewCustomer)
         .then(({ data }) => {
           commit("ADD_NEW_CUSTOMER_DATA", data.payload);
           commit("SET_FORM_ADD_NEW_CUSTOMER", {
@@ -210,7 +258,7 @@ const store = new Vuex.Store({
     },
     addNewLoan({ commit, state }) {
       axios
-        .post("http://localhost:8080/api/pembiayaan", state.formAddNewLoan)
+        .post(`${baseUrlAPI}/api/pembiayaan/create`, state.formAddNewLoan)
         .then(({ data }) => {
           console.log(data);
           commit("ADD_NEW_LOAN_DATA", data.payload);
@@ -222,6 +270,48 @@ const store = new Vuex.Store({
             tenor: "",
             nikKtp: "",
           });
+        })
+        .catch((err) => console.log(err));
+    },
+    updateBranchOfficer({ commit, state }) {
+      axios
+        .put(`${baseUrlAPI}/api/officer/update`, state.formUpdateBranchOfficer)
+        .then(({ status }) => {
+          if (status == 200) {
+            commit("SET_FORM_UPDATE_BRANCH_OFFICER", {
+              id: "",
+              nikKaryawan: "",
+              nikKtp: "",
+              nama: "",
+              tanggalLahir: "",
+              tempatLahir: "",
+              alamat: "",
+              jabatan: "",
+              cabang: "",
+              status: "",
+            });
+          }
+        })
+        .catch((err) => console.log(err));
+    },
+    updateCustomer({ commit, state }) {
+      axios
+        .put(`${baseUrlAPI}/api/nasabah/update`, state.formUpdateCustomer)
+        .then(({ status }) => {
+          if (status == 200) {
+            commit("SET_FORM_UPDATE_CUSTOMER", {
+              id: "",
+              nama: "",
+              nikKtp: "",
+              email: "",
+              password: "",
+              noHP: "",
+              pekerjaan: "",
+              alamat: "",
+              flagWarungTepat: "",
+              tanggalBuat: "",
+            });
+          }
         })
         .catch((err) => console.log(err));
     },
@@ -241,6 +331,12 @@ const store = new Vuex.Store({
     },
     getAllCustomersData(state) {
       return state.allCustomers;
+    },
+    getDetailBranchOfficerData(state) {
+      return state.detailBranchOfficer;
+    },
+    getDetailCustomerData(state) {
+      return state.detailCustomer;
     },
   },
   plugins: [vuexLocal.plugin],

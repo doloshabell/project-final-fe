@@ -7,13 +7,13 @@
           <button
             class="p-2 rounded-md font-normal text-base text-white bg-[#FF8000] hover:bg-[#D06800]"
           >
-            <font-awesome-icon icon="fa-solid fa-plus" />
+            <font-awesome-icon icon="fa-solid fa-plus" class="mr-1" />
             Add New Customer
           </button>
         </router-link>
       </div>
       <div>
-        <div @click="getData(customer.id)" v-for="customer in getAllCustomersData" :key="customer.id">
+        <div @click="goToDetailCustomer(customer.nikKtp)" v-for="customer in getAllCustomersData" :key="customer.id">
           <ListCustomer :customer="customer" />
         </div>
       </div>
@@ -35,8 +35,9 @@ export default {
     this.$store.dispatch("getAllCustomers");
   },
   methods: {
-    getData(id) {
-      this.$router.push(`/customers/${id}`);
+    goToDetailCustomer(nikKtp) {
+      this.$router.push("/customers/detail");
+      this.$store.dispatch("getDetailCustomer", nikKtp);
     }
   }
 };

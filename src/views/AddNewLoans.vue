@@ -57,7 +57,7 @@
             type="submit"
             class="text-center text-lg bg-[#FF8000] text-white p-1 rounded w-4/5 hover:bg-[#D06800]"
           >
-            Add Data
+            Add Data Loan
           </button>
         </div>
       </form>
