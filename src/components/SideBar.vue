@@ -11,12 +11,12 @@
       <h1 class="text-base">Halo, {{ getUserData.nama }}</h1>
       <h1 class="text-[#6E6E6E] text-sm">{{ getUserData.hak }}</h1>
     </div>
-    <div class="mt-10 px-2">
+    <div class="mt-10 pl-2">
       <router-link to="/">
         <div
           :class="
             routeName == 'home'
-              ? 'mb-2 border-l-4 border-[#FF8000] rounded w-full hover:bg-[#F0F0F0] hover:rounded'
+              ? 'mb-2 border-l-4 border-[#FF8000] rounded-l w-full bg-[#F0F0F0] hover:rounded'
               : 'mb-2 w-full hover:bg-[#F0F0F0] hover:rounded'
           "
         >
@@ -40,11 +40,18 @@
           </div>
         </div>
       </router-link>
-      <router-link to="/branch-officer" v-if="getUserData.hak == 'Pusat' || getUserData.hak == 'Head Branch Officer'">
+      <router-link
+        to="/branch-officer"
+        v-if="
+          getUserData.hak == 'Pusat' || getUserData.hak == 'Head Branch Officer'
+        "
+      >
         <div
           :class="
-            routeName == 'branch-officer' || routeName == 'addNewBranchOfficer' || routeName == 'detailBranchOfficer'
-              ? 'mb-2 border-l-4 border-[#FF8000] rounded w-full hover:bg-[#F0F0F0] hover:rounded'
+            routeName == 'branch-officer' ||
+            routeName == 'addNewBranchOfficer' ||
+            routeName == 'detailBranchOfficer'
+              ? 'mb-2 border-l-4 border-[#FF8000] rounded-l w-full bg-[#F0F0F0] hover:rounded'
               : 'mb-2 w-full hover:bg-[#F0F0F0] hover:rounded'
           "
         >
@@ -54,7 +61,8 @@
                 :icon="iconFaUserTie"
                 :class="
                   routeName == 'branch-officer' ||
-                  routeName == 'addNewBranchOfficer' || routeName == 'detailBranchOfficer'
+                  routeName == 'addNewBranchOfficer' ||
+                  routeName == 'detailBranchOfficer'
                     ? 'text-[#FF8000]'
                     : 'text-[#6E6E6E]'
                 "
@@ -63,7 +71,8 @@
             <span
               :class="
                 routeName == 'branch-officer' ||
-                routeName == 'addNewBranchOfficer' || routeName == 'detailBranchOfficer'
+                routeName == 'addNewBranchOfficer' ||
+                routeName == 'detailBranchOfficer'
                   ? 'ml-[10px] text-[#6F6F6F] font-semibold'
                   : 'ml-[10px] hover:text-[#4A4A4A]'
               "
@@ -76,7 +85,7 @@
         <div
           :class="
             routeName == 'loans' || routeName == 'addNewLoans'
-              ? 'mb-2 border-l-4 border-[#FF8000] rounded w-full hover:bg-[#F0F0F0] hover:rounded'
+              ? 'mb-2 border-l-4 border-[#FF8000] rounded-l w-full bg-[#F0F0F0] hover:rounded'
               : 'mb-2 w-full hover:bg-[#F0F0F0] hover:rounded'
           "
         >
@@ -106,7 +115,7 @@
         <div
           :class="
             routeName == 'savings'
-              ? 'mb-2 border-l-4 border-[#FF8000] rounded w-full hover:bg-[#F0F0F0] hover:rounded'
+              ? 'mb-2 border-l-4 border-[#FF8000] rounded-l w-full bg-[#F0F0F0] hover:rounded'
               : 'mb-2 w-full hover:bg-[#F0F0F0] hover:rounded'
           "
         >
@@ -133,8 +142,10 @@
       <router-link to="/customers">
         <div
           :class="
-            routeName == 'customers' || routeName == 'addNewCustomers' || routeName == 'detailCustomer'
-              ? 'mb-2 border-l-4 border-[#FF8000] rounded w-full hover:bg-[#F0F0F0] hover:rounded'
+            routeName == 'customers' ||
+            routeName == 'addNewCustomers' ||
+            routeName == 'detailCustomer'
+              ? 'mb-2 border-l-4 border-[#FF8000] rounded-l w-full bg-[#F0F0F0] hover:rounded'
               : 'mb-2 w-full hover:bg-[#F0F0F0] hover:rounded'
           "
         >
@@ -143,7 +154,9 @@
               <font-awesome-icon
                 :icon="iconFaUserGroup"
                 :class="
-                  routeName == 'customers' || routeName == 'addNewCustomers' || routeName == 'detailCustomer'
+                  routeName == 'customers' ||
+                  routeName == 'addNewCustomers' ||
+                  routeName == 'detailCustomer'
                     ? 'text-[#FF8000]'
                     : 'text-[#6E6E6E]'
                 "
@@ -151,7 +164,9 @@
             </div>
             <span
               :class="
-                routeName == 'customers' || routeName == 'addNewCustomers' || routeName == 'detailCustomer'
+                routeName == 'customers' ||
+                routeName == 'addNewCustomers' ||
+                routeName == 'detailCustomer'
                   ? 'ml-[10px] text-[#6F6F6F] font-semibold'
                   : 'ml-[10px] hover:text-[#4A4A4A]'
               "

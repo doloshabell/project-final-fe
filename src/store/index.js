@@ -237,36 +237,38 @@ const store = new Vuex.Store({
         .post(`${baseUrlAPI}/api/officer/create`, state.formAddNewBranchOfficer)
         .then(({ data }) => {
           commit("ADD_NEW_BRANCH_OFFICER_DATA", data.payload);
-          commit("SET_FORM_ADD_NEW_BRANCH_OFFICER", {
-            nama: "",
-            nikKtp: "",
-            password: "",
-            tanggalLahir: "",
-            tempatLahir: "",
-            alamat: "",
-            jabatan: "",
-            cabang: "",
-          });
         })
         .catch((err) => console.log(err));
+
+      commit("SET_FORM_ADD_NEW_BRANCH_OFFICER", {
+        nama: "",
+        nikKtp: "",
+        password: "",
+        tanggalLahir: "",
+        tempatLahir: "",
+        alamat: "",
+        jabatan: "",
+        cabang: "",
+      });
     },
     addNewCustomer({ commit, state }) {
       axios
         .post(`${baseUrlAPI}/api/nasabah/create`, state.formAddNewCustomer)
         .then(({ data }) => {
           commit("ADD_NEW_CUSTOMER_DATA", data.payload);
-          commit("SET_FORM_ADD_NEW_CUSTOMER", {
-            nama: "",
-            nikKtp: "",
-            email: "",
-            password: "",
-            noHP: "",
-            pekerjaan: "",
-            alamat: "",
-            flagWarungTepat: "",
-          });
         })
         .catch((err) => console.log(err));
+
+      commit("SET_FORM_ADD_NEW_CUSTOMER", {
+        nama: "",
+        nikKtp: "",
+        email: "",
+        password: "",
+        noHP: "",
+        pekerjaan: "",
+        alamat: "",
+        flagWarungTepat: "",
+      });
     },
     addNewLoan({ commit, state }) {
       axios
@@ -274,58 +276,58 @@ const store = new Vuex.Store({
         .then(({ data }) => {
           console.log(data);
           commit("ADD_NEW_LOAN_DATA", data.payload);
-          commit("SET_FORM_ADD_NEW_LOAN", {
-            status: "1",
-            jumlahPembiayaan: "",
-            jumlahHarusBayar: "",
-            jumlahHarusBayarBulan: "",
-            tenor: "",
-            nikKtp: "",
-          });
         })
         .catch((err) => console.log(err));
+
+      commit("SET_FORM_ADD_NEW_LOAN", {
+        status: "1",
+        jumlahPembiayaan: "",
+        jumlahHarusBayar: "",
+        jumlahHarusBayarBulan: "",
+        tenor: "",
+        nikKtp: "",
+      });
     },
     updateBranchOfficer({ commit, state }) {
       axios
         .put(`${baseUrlAPI}/api/officer/update`, state.formUpdateBranchOfficer)
         .then(({ status }) => {
-          if (status == 200) {
-            commit("SET_FORM_UPDATE_BRANCH_OFFICER", {
-              id: "",
-              nikKaryawan: "",
-              nikKtp: "",
-              nama: "",
-              tanggalLahir: "",
-              tempatLahir: "",
-              alamat: "",
-              jabatan: "",
-              cabang: "",
-              status: "",
-            });
-          }
+          console.log(status);
         })
         .catch((err) => console.log(err));
+
+      commit("SET_FORM_UPDATE_BRANCH_OFFICER", {
+        id: "",
+        nikKaryawan: "",
+        nikKtp: "",
+        nama: "",
+        tanggalLahir: "",
+        tempatLahir: "",
+        alamat: "",
+        jabatan: "",
+        cabang: "",
+        status: "",
+      });
     },
     updateCustomer({ commit, state }) {
       axios
         .put(`${baseUrlAPI}/api/nasabah/update`, state.formUpdateCustomer)
         .then(({ status }) => {
-          if (status == 200) {
-            commit("SET_FORM_UPDATE_CUSTOMER", {
-              id: "",
-              nama: "",
-              nikKtp: "",
-              email: "",
-              password: "",
-              noHP: "",
-              pekerjaan: "",
-              alamat: "",
-              flagWarungTepat: "",
-              tanggalBuat: "",
-            });
-          }
+          console.log(status);
         })
         .catch((err) => console.log(err));
+        commit("SET_FORM_UPDATE_CUSTOMER", {
+          id: "",
+          nama: "",
+          nikKtp: "",
+          email: "",
+          password: "",
+          noHP: "",
+          pekerjaan: "",
+          alamat: "",
+          flagWarungTepat: "",
+          tanggalBuat: "",
+        });
     },
   },
   getters: {
