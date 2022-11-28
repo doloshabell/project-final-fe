@@ -9,6 +9,7 @@
     <div class="px-5 my-5">
       <h1 class="font-semibold text-2xl">PROSPERA</h1>
       <h1 class="text-base">Halo, {{ getUserData.nama }}</h1>
+      <h1 class="text-[#6E6E6E] text-sm">{{ getUserData.hak }}</h1>
     </div>
     <div class="mt-10 px-2">
       <router-link to="/">
@@ -39,7 +40,7 @@
           </div>
         </div>
       </router-link>
-      <router-link to="/branch-officer">
+      <router-link to="/branch-officer" v-if="getUserData.hak == 'Pusat' || getUserData.hak == 'Head Branch Officer'">
         <div
           :class="
             routeName == 'branch-officer' || routeName == 'addNewBranchOfficer' || routeName == 'detailBranchOfficer'

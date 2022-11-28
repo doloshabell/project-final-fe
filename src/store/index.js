@@ -78,6 +78,7 @@ const store = new Vuex.Store({
     allCustomers: [],
     detailBranchOfficer: {},
     detailCustomer: {},
+    detailSaving: {},
   },
   mutations: {
     SET_USER_DATA(state, payload) {
@@ -127,6 +128,9 @@ const store = new Vuex.Store({
     },
     SET_DETAIL_CUSTOMER(state, payload) {
       state.detailCustomer = payload;
+    },
+    SET_DETAIL_SAVING(state, payload) {
+      state.detailSaving = payload;
     },
     ADD_NEW_BRANCH_OFFICER_DATA(state, payload) {
       state.allBranchOfficers.push(payload);
@@ -217,6 +221,14 @@ const store = new Vuex.Store({
         .get(`${baseUrlAPI}/api/nasabah/${nikKtp}`)
         .then(({ data }) => {
           commit("SET_DETAIL_CUSTOMER", data.payload);
+        })
+        .catch((err) => console.log(err));
+    },
+    getDetailSaving({ commit }, noRekening) {
+      axios
+        .get(`${baseUrlAPI}/api/tabungan/history/${noRekening}`)
+        .then(({ data }) => {
+          commit("SET_DETAIL_SAVING", data.payload);
         })
         .catch((err) => console.log(err));
     },
@@ -338,6 +350,9 @@ const store = new Vuex.Store({
     getDetailCustomerData(state) {
       return state.detailCustomer;
     },
+    getDetailSaving(state) {
+      return state.detailSaving;
+    }
   },
   plugins: [vuexLocal.plugin],
 });

@@ -5,15 +5,16 @@ import LoginPage from "../views/LoginPage.vue";
 import HomePage from "../views/HomePage.vue";
 import AllBranchOfficer from "../views/AllBranchOfficer.vue";
 import AllLoans from "../views/AllLoans.vue";
-import AllSavings from '../views/AllSavings.vue';
+import AllSavings from "../views/AllSavings.vue";
 import AllCustomers from "../views/AllCustomers.vue";
 import AddNewBranchOfficer from "../views/AddNewBranchOfficer.vue";
 import AddNewLoans from "../views/AddNewLoans.vue";
 import AddNewCustomers from "../views/AddNewCustomers.vue";
-import DetailBranchOfficer from '../views/DetailBranchOfficer.vue';
-import DetailCustomer from '../views/DetailCustomer.vue';
-import UpdateBranchOfficer from '../views/UpdateBranchOfficer.vue';
-import UpdateCustomer from '../views/UpdateCustomer.vue';
+import DetailBranchOfficer from "../views/DetailBranchOfficer.vue";
+import DetailCustomer from "../views/DetailCustomer.vue";
+import DetailSaving from "../views/DetailSaving.vue";
+import UpdateBranchOfficer from "../views/UpdateBranchOfficer.vue";
+import UpdateCustomer from "../views/UpdateCustomer.vue";
 
 Vue.use(VueRouter);
 
@@ -70,25 +71,31 @@ const routes = [
     path: "/branch-officer/detail",
     name: "detailBranchOfficer",
     component: DetailBranchOfficer,
-    meta: {requiresAuth: true},
+    meta: { requiresAuth: true },
   },
   {
     path: "/customers/detail",
     name: "detailCustomer",
     component: DetailCustomer,
-    meta: {requiresAuth: true},
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/savings/detail",
+    name: "detailSaving",
+    component: DetailSaving,
+    meta: { requiresAuth: true },
   },
   {
     path: "/branch-officer/update",
     name: "updateBranchOfficer",
     component: UpdateBranchOfficer,
-    meta: {requiresAuth: true},
+    meta: { requiresAuth: true },
   },
   {
     path: "/customers/update",
     name: "updateCustomer",
     component: UpdateCustomer,
-    meta: {requiresAuth: true},
+    meta: { requiresAuth: true },
   },
   {
     path: "/login",

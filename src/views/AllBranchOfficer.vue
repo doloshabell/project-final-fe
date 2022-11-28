@@ -14,7 +14,7 @@
       </div>
       <div>
         <div @click="goToDetailBranchOfficer(officer.nikKaryawan)" v-for="officer in getAllBranchOfficersData" :key="officer.id">
-          <ListBranchOfficer :officer="officer" />
+          <ListBranchOfficer :officer="officer" :hak="getUserData.hak" />
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@ export default {
   name: "AllBranchOfficer",
   components: { ListBranchOfficer },
   computed: {
-    ...mapGetters(["getAllBranchOfficersData"]),
+    ...mapGetters(["getAllBranchOfficersData", "getUserData"]),
   },
   created() {
     this.$store.dispatch("getAllBranchOfficers");

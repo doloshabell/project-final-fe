@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="officer.jabatan !== 'Pusat'"
+    v-if="officer.jabatan !== 'Pusat' && hak !== officer.jabatan"
     class="bg-[#FAFAFA] border flex flex-row justify-between items-center mb-3 px-6 py-2 rounded w-full hover:bg-[#D1D1D1]"
   >
     <div class="w-1/3">
@@ -12,11 +12,7 @@
     </div>
     <div class="text-end w-1/3">
       <h1 class="text-lg font-semibold">
-        {{
-          officer.jabatan === "HBO"
-            ? "Head Branch Officer"
-            : "Community Officer"
-        }}
+        {{ officer.jabatan }}
       </h1>
     </div>
   </div>
@@ -25,6 +21,6 @@
 <script>
 export default {
   name: "ListBranchOfficer",
-  props: ["officer"],
+  props: ["officer", "hak"],
 };
 </script>
