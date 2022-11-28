@@ -73,7 +73,7 @@
           </button>
         </div>
       </form>
-      <div class="mt-7" v-if="jumlahHarusBayar > 0 || jumlahHarusBayar == ''">
+      <div class="mt-7" v-if="jumlahHarusBayar > 0">
         <div class="border-b-2 border-black pb-1 w-full">
           <h1 class="font-semibold text-xl">Simulasi Pinjaman</h1>
         </div>
@@ -109,7 +109,7 @@
             </h1>
           </div>
         </div>
-        <div class="flex flex-row justify-between mt-[6px] mb-10">
+        <div class="flex flex-row justify-between bg-[#D1D1D1] p-2 mt-[6px] mb-10">
           <h1 class="w-1/4 text-base font-semibold text-start">Total</h1>
           <h1 class="w-1/4 text-base font-semibold text-center">
             {{ totalAngsuranMargin }}
@@ -159,7 +159,6 @@ export default {
         this.jumlahHarusBayarBulan.toString();
       this.formAddNewLoan.tenor = "12";
       this.$store.dispatch("addNewLoan");
-      console.log(this.simulasiPinjaman);
       this.jumlahHarusBayar = "";
       this.jumlahHarusBayarBulan = "";
       this.simulasiPinjaman = [];
@@ -178,6 +177,9 @@ export default {
       let angsuranPokok = this.formAddNewLoan.jumlahPembiayaan / 12;
       this.totalAngsuranPokok = angsuranPokok * 12;
       let totalAngsuran = angsuranMargin + angsuranPokok;
+      if (this.simulasiPinjaman.length > 0) {
+        this.simulasiPinjaman = []
+      }
       for (let i = 1; i <= 12; i++) {
         let cicilan = {};
         cicilan["angsuran"] = i;

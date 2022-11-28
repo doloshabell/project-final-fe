@@ -275,9 +275,13 @@ const store = new Vuex.Store({
         .post(`${baseUrlAPI}/api/pembiayaan/create`, state.formAddNewLoan)
         .then(({ data }) => {
           console.log(data);
+          console.log("halo");
           commit("ADD_NEW_LOAN_DATA", data.payload);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err.message);
+          window.alert("Gagal membuat pembiayaan dikarenakan masih ada pembiayaan yang belum lunas");
+        });
 
       commit("SET_FORM_ADD_NEW_LOAN", {
         status: "1",
@@ -316,18 +320,18 @@ const store = new Vuex.Store({
           console.log(status);
         })
         .catch((err) => console.log(err));
-        commit("SET_FORM_UPDATE_CUSTOMER", {
-          id: "",
-          nama: "",
-          nikKtp: "",
-          email: "",
-          password: "",
-          noHP: "",
-          pekerjaan: "",
-          alamat: "",
-          flagWarungTepat: "",
-          tanggalBuat: "",
-        });
+      commit("SET_FORM_UPDATE_CUSTOMER", {
+        id: "",
+        nama: "",
+        nikKtp: "",
+        email: "",
+        password: "",
+        noHP: "",
+        pekerjaan: "",
+        alamat: "",
+        flagWarungTepat: "",
+        tanggalBuat: "",
+      });
     },
   },
   getters: {
