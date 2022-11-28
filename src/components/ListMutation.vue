@@ -17,7 +17,7 @@
           new Intl.NumberFormat("id", {
             style: "currency",
             currency: "IDR",
-          }).format(mutation.mutasi)
+          }).format(mutasi)
         }}
       </h1>
     </div>
@@ -39,5 +39,13 @@
 export default {
   name: "ListMutation",
   props: ["mutation"],
+  data() {
+    return {
+      mutasi: ""
+    }
+  },
+  created() {
+    this.mutasi = Math.abs(this.$props.mutation.mutasi * 1);
+  }
 };
 </script>

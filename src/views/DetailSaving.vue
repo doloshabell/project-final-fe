@@ -28,6 +28,9 @@
             }}
           </h1>
         </div>
+        <div class="mb-1 mt-10">
+        <h1 class="font-semibold text-xl">Mutasi Rekening</h1>
+      </div>
         <div class="mt-5">
           <div v-for="mutation in getDetailSaving" :key="mutation.id">
             <ListMutation :mutation="mutation" />

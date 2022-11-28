@@ -44,12 +44,20 @@
           </div>
           <div class="mr-4">
             <p class="mb-1 text-base">NIK</p>
-            <input
+            <!-- <input
               type="text"
-              name="tenor"
+              name="nikKtp"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
               v-model="formAddNewLoan.nikKtp"
-            />
+            /> -->
+            <select
+              name="nikKtp"
+              id="nikKtp"
+              class="ml-[3px] rounded-sm p-1 w-full outline"
+              v-model="formAddNewLoan.nikKtp"
+            >
+              <option v-for="customerData in getAllCustomersData" :key="customerData.id" :value="customerData.nikKtp">{{`${customerData.nikKtp} - ${customerData.nama}`}}</option>
+            </select>
           </div>
         </div>
         <div class="flex justify-center mt-6">
@@ -66,9 +74,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: "AddNewLoans",
   computed: {
+    ...mapGetters(["getAllCustomersData"]),
     formAddNewLoan() {
       return this.$store.state.formAddNewLoan;
     }

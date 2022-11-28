@@ -5,7 +5,10 @@
         <h1 class="font-semibold text-xl">Detail Branch Officer</h1>
         <router-link to="/branch-officer/update">
           <button
-          v-if="getUserData.hak == 'Pusat' || getUserData.hak == 'Head Branch Officer'"
+            v-if="
+              getUserData.hak == 'Pusat' ||
+              getUserData.hak == 'Head Branch Officer'
+            "
             @click="getDataBranchOfficer"
             class="p-2 rounded-md font-normal text-base text-white bg-[#FF8000] hover:bg-[#D06800]"
           >

@@ -63,11 +63,19 @@
           <div class="mb-2 mr-4">
             <p class="mb-1 text-base">Agen Warung Tepat</p>
             <input
-              type="text"
-              name="agen"
-              class="ml-[3px] rounded-sm p-[2px] w-full outline"
               v-model="formUpdateCustomer.flagWarungTepat"
+              type="radio"
+              value="1"
+              name="ya"
             />
+            <label for="ya" class="ml-1 mr-4">Ya</label>
+            <input
+              v-model="formUpdateCustomer.flagWarungTepat"
+              type="radio"
+              value="0"
+              name="tidak"
+            />
+            <label for="tidak" class="ml-1">Tidak</label>
           </div>
         </div>
         <div class="flex justify-center mt-4">
@@ -95,7 +103,7 @@ export default {
     submitUpdateCustomers() {
       this.$store.dispatch("updateCustomer");
       this.$router.push("/customers");
-    }
-  }
+    },
+  },
 };
 </script>

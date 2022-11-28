@@ -352,7 +352,7 @@ const store = new Vuex.Store({
     },
     getDetailSaving(state) {
       return state.detailSaving;
-    }
+    },
   },
   plugins: [vuexLocal.plugin],
 });
