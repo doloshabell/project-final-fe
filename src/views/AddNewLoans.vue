@@ -164,7 +164,7 @@ export default {
       this.simulasiPinjaman = [];
       this.totalAngsuranMargin = "";
       this.totalAngsuranPokok = "";
-      // this.$router.push("/loans");
+      this.$router.push("/loans");
     },
     upData() {
       this.jumlahHarusBayar =
