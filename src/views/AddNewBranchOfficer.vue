@@ -62,21 +62,30 @@
           </div>
           <div class="mb-2 mr-4">
             <p class="mb-1 text-base">Jabatan</p>
-            <input
-              type="text"
+            <select
               name="jabatan"
-              class="ml-[3px] rounded-sm p-[2px] w-full outline"
+              id="jabatan"
+              class="ml-[3px] rounded-sm p-1 w-full outline"
               v-model="formAddNewBranchOfficer.jabatan"
-            />
+            >
+              <option value="Head Branch Officer" v-if="getUserData.hak == 'Pusat'">Head Branch Officer</option>
+              <option value="Community Officer">Community Officer</option>
+            </select>
           </div>
           <div class="mb-2">
             <p class="mb-1 text-base">Cabang</p>
-            <input
-              type="text"
+            <select
               name="cabang"
-              class="ml-[3px] rounded-sm p-[2px] w-full outline"
+              id="cabang"
+              class="ml-[3px] rounded-sm p-1 w-full outline"
               v-model="formAddNewBranchOfficer.cabang"
-            />
+            >
+              <option value="Jawa">Jawa</option>
+              <option value="Sumatera">Sumatera</option>
+              <option value="Kalimantan">Kalimantan</option>
+              <option value="Sulawesi">Sulawesi</option>
+              <option value="Papua">Papua</option>
+            </select>
           </div>
         </div>
         <div class="flex justify-center mt-4">
@@ -93,18 +102,21 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "AddNewBranchOfficer",
   computed: {
+    ...mapGetters(["getUserData"]),
     formAddNewBranchOfficer() {
       return this.$store.state.formAddNewBranchOfficer;
-    }
+    },
   },
   methods: {
     addNewBranchOfficer() {
       this.$store.dispatch("addNewBranchOfficer");
       this.$router.push("/branch-officer");
-    }
-  }
+    },
+  },
 };
 </script>

@@ -72,11 +72,19 @@
           <div class="mb-4">
             <p class="mb-1 text-base">Agen Warung Tepat?</p>
             <input
-              type="text"
-              name="agen"
-              class="ml-[3px] rounded-sm p-[2px] w-full outline"
               v-model="formAddNewCustomer.flagWarungTepat"
+              type="radio"
+              value="1"
+              name="ya"
             />
+            <label for="ya" class="ml-1 mr-4">Ya</label>
+            <input
+              v-model="formAddNewCustomer.flagWarungTepat"
+              type="radio"
+              value="0"
+              name="tidak"
+            />
+            <label for="tidak" class="ml-1">Tidak</label>
           </div>
         </div>
         <div class="flex justify-center">
@@ -103,7 +111,7 @@ export default {
   methods: {
     addNewCustomer() {
       this.$store.dispatch("addNewCustomer");
-      this.$router.push("/customers")
+      this.$router.push("/customers");
     }
   }
 };

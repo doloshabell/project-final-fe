@@ -25,12 +25,12 @@
             />
           </div>
           <div class="mb-2 mr-4">
-            <p class="mb-1 text-base">Nomor Induk Karyawan</p>
+            <p class="mb-1 text-base">Tempat Lahir</p>
             <input
               type="text"
-              name="nikKaryawan"
+              name="tempatLahir"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
-              v-model="formUpdateBranchOfficer.nikKaryawan"
+              v-model="formUpdateBranchOfficer.tempatLahir"
             />
           </div>
           <div class="mb-2">
@@ -43,15 +43,6 @@
             />
           </div>
           <div class="mb-2 mr-4">
-            <p class="mb-1 text-base">Tempat Lahir</p>
-            <input
-              type="text"
-              name="tempatLahir"
-              class="ml-[3px] rounded-sm p-[2px] w-full outline"
-              v-model="formUpdateBranchOfficer.tempatLahir"
-            />
-          </div>
-          <div class="mb-2">
             <p class="mb-1 text-base">Alamat</p>
             <input
               type="text"
@@ -60,23 +51,60 @@
               v-model="formUpdateBranchOfficer.alamat"
             />
           </div>
-          <div class="mb-2 mr-4">
+          <div class="mb-2">
             <p class="mb-1 text-base">Jabatan</p>
-            <input
+            <!-- <input
               type="text"
               name="jabatan"
               class="ml-[3px] rounded-sm p-[2px] w-full outline"
               v-model="formUpdateBranchOfficer.jabatan"
-            />
+            /> -->
+            <select
+              name="jabatan"
+              id="jabatan"
+              class="ml-[3px] rounded-sm p-1 w-full outline"
+              v-model="formUpdateBranchOfficer.jabatan"
+            >
+              <option
+                value="Head Branch Officer"
+                v-if="getUserData.hak == 'Pusat'"
+              >
+                Head Branch Officer
+              </option>
+              <option value="Community Officer">Community Officer</option>
+            </select>
+          </div>
+          <div class="mb-2 mr-4">
+            <p class="mb-1 text-base">Cabang</p>
+            <select
+              name="cabang"
+              id="cabang"
+              class="ml-[3px] rounded-sm p-1 w-full outline"
+              v-model="formUpdateBranchOfficer.cabang"
+            >
+              <option value="Jawa">Jawa</option>
+              <option value="Sumatera">Sumatera</option>
+              <option value="Kalimantan">Kalimantan</option>
+              <option value="Sulawesi">Sulawesi</option>
+              <option value="Papua">Papua</option>
+            </select>
           </div>
           <div class="mb-2">
-            <p class="mb-1 text-base">Cabang</p>
+            <p class="mb-1 text-base">Status Bekerja</p>
             <input
-              type="text"
-              name="cabang"
-              class="ml-[3px] rounded-sm p-[2px] w-full outline"
-              v-model="formUpdateBranchOfficer.cabang"
+              v-model="formUpdateBranchOfficer.status"
+              type="radio"
+              value="1"
+              name="aktif"
             />
+            <label for="aktif" class="ml-1 mr-4">Aktif</label>
+            <input
+              v-model="formUpdateBranchOfficer.status"
+              type="radio"
+              value="0"
+              name="aktif"
+            />
+            <label for="aktif" class="ml-1">Tidak Aktif</label>
           </div>
         </div>
         <div class="flex justify-center mt-4">
@@ -93,9 +121,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "UpdateBranchOfficer",
   computed: {
+    ...mapGetters(["getUserData"]),
     formUpdateBranchOfficer() {
       return this.$store.state.formUpdateBranchOfficer;
     },

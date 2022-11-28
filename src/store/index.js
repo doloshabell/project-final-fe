@@ -78,6 +78,7 @@ const store = new Vuex.Store({
     allCustomers: [],
     detailBranchOfficer: {},
     detailCustomer: {},
+    detailSaving: {},
   },
   mutations: {
     SET_USER_DATA(state, payload) {
@@ -127,6 +128,9 @@ const store = new Vuex.Store({
     },
     SET_DETAIL_CUSTOMER(state, payload) {
       state.detailCustomer = payload;
+    },
+    SET_DETAIL_SAVING(state, payload) {
+      state.detailSaving = payload;
     },
     ADD_NEW_BRANCH_OFFICER_DATA(state, payload) {
       state.allBranchOfficers.push(payload);
@@ -220,100 +224,114 @@ const store = new Vuex.Store({
         })
         .catch((err) => console.log(err));
     },
+    getDetailSaving({ commit }, noRekening) {
+      axios
+        .get(`${baseUrlAPI}/api/tabungan/history/${noRekening}`)
+        .then(({ data }) => {
+          commit("SET_DETAIL_SAVING", data.payload);
+        })
+        .catch((err) => console.log(err));
+    },
     addNewBranchOfficer({ commit, state }) {
       axios
         .post(`${baseUrlAPI}/api/officer/create`, state.formAddNewBranchOfficer)
         .then(({ data }) => {
           commit("ADD_NEW_BRANCH_OFFICER_DATA", data.payload);
-          commit("SET_FORM_ADD_NEW_BRANCH_OFFICER", {
-            nama: "",
-            nikKtp: "",
-            password: "",
-            tanggalLahir: "",
-            tempatLahir: "",
-            alamat: "",
-            jabatan: "",
-            cabang: "",
-          });
         })
         .catch((err) => console.log(err));
+
+      commit("SET_FORM_ADD_NEW_BRANCH_OFFICER", {
+        nama: "",
+        nikKtp: "",
+        password: "",
+        tanggalLahir: "",
+        tempatLahir: "",
+        alamat: "",
+        jabatan: "",
+        cabang: "",
+      });
     },
     addNewCustomer({ commit, state }) {
       axios
         .post(`${baseUrlAPI}/api/nasabah/create`, state.formAddNewCustomer)
         .then(({ data }) => {
           commit("ADD_NEW_CUSTOMER_DATA", data.payload);
-          commit("SET_FORM_ADD_NEW_CUSTOMER", {
-            nama: "",
-            nikKtp: "",
-            email: "",
-            password: "",
-            noHP: "",
-            pekerjaan: "",
-            alamat: "",
-            flagWarungTepat: "",
-          });
         })
         .catch((err) => console.log(err));
+
+      commit("SET_FORM_ADD_NEW_CUSTOMER", {
+        nama: "",
+        nikKtp: "",
+        email: "",
+        password: "",
+        noHP: "",
+        pekerjaan: "",
+        alamat: "",
+        flagWarungTepat: "",
+      });
     },
     addNewLoan({ commit, state }) {
       axios
         .post(`${baseUrlAPI}/api/pembiayaan/create`, state.formAddNewLoan)
         .then(({ data }) => {
           console.log(data);
+          console.log("halo");
           commit("ADD_NEW_LOAN_DATA", data.payload);
-          commit("SET_FORM_ADD_NEW_LOAN", {
-            status: "1",
-            jumlahPembiayaan: "",
-            jumlahHarusBayar: "",
-            jumlahHarusBayarBulan: "",
-            tenor: "",
-            nikKtp: "",
-          });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err.message);
+          window.alert("Gagal membuat pembiayaan dikarenakan masih ada pembiayaan yang belum lunas");
+        });
+
+      commit("SET_FORM_ADD_NEW_LOAN", {
+        status: "1",
+        jumlahPembiayaan: "",
+        jumlahHarusBayar: "",
+        jumlahHarusBayarBulan: "",
+        tenor: "",
+        nikKtp: "",
+      });
     },
     updateBranchOfficer({ commit, state }) {
       axios
         .put(`${baseUrlAPI}/api/officer/update`, state.formUpdateBranchOfficer)
         .then(({ status }) => {
-          if (status == 200) {
-            commit("SET_FORM_UPDATE_BRANCH_OFFICER", {
-              id: "",
-              nikKaryawan: "",
-              nikKtp: "",
-              nama: "",
-              tanggalLahir: "",
-              tempatLahir: "",
-              alamat: "",
-              jabatan: "",
-              cabang: "",
-              status: "",
-            });
-          }
+          console.log(status);
         })
         .catch((err) => console.log(err));
+
+      commit("SET_FORM_UPDATE_BRANCH_OFFICER", {
+        id: "",
+        nikKaryawan: "",
+        nikKtp: "",
+        nama: "",
+        tanggalLahir: "",
+        tempatLahir: "",
+        alamat: "",
+        jabatan: "",
+        cabang: "",
+        status: "",
+      });
     },
     updateCustomer({ commit, state }) {
       axios
         .put(`${baseUrlAPI}/api/nasabah/update`, state.formUpdateCustomer)
         .then(({ status }) => {
-          if (status == 200) {
-            commit("SET_FORM_UPDATE_CUSTOMER", {
-              id: "",
-              nama: "",
-              nikKtp: "",
-              email: "",
-              password: "",
-              noHP: "",
-              pekerjaan: "",
-              alamat: "",
-              flagWarungTepat: "",
-              tanggalBuat: "",
-            });
-          }
+          console.log(status);
         })
         .catch((err) => console.log(err));
+      commit("SET_FORM_UPDATE_CUSTOMER", {
+        id: "",
+        nama: "",
+        nikKtp: "",
+        email: "",
+        password: "",
+        noHP: "",
+        pekerjaan: "",
+        alamat: "",
+        flagWarungTepat: "",
+        tanggalBuat: "",
+      });
     },
   },
   getters: {
@@ -337,6 +355,9 @@ const store = new Vuex.Store({
     },
     getDetailCustomerData(state) {
       return state.detailCustomer;
+    },
+    getDetailSaving(state) {
+      return state.detailSaving;
     },
   },
   plugins: [vuexLocal.plugin],

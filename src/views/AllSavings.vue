@@ -5,7 +5,7 @@
         <h1 class="font-semibold text-xl">List Savings</h1>
       </div>
       <div class="grid grid-cols-2 gap-2">
-        <div v-for="saving in getAllSavingsData" :key="saving.id" class="w-11/12">
+        <div @click="goToDetailSaving(saving.noRekening, saving.nikKtp)" v-for="saving in getAllSavingsData" :key="saving.id" class="w-11/12">
           <ListSavings :saving="saving" />
         </div>
       </div>
@@ -26,5 +26,12 @@ export default {
     this.$store.dispatch("getAllSavings");
   },
   components: { ListSavings },
+  methods: {
+    goToDetailSaving(noRekening, nikKtp) {
+      this.$router.push("/savings/detail");
+      this.$store.dispatch("getDetailCustomer", nikKtp);
+      this.$store.dispatch("getDetailSaving", noRekening);
+    }
+  }
 };
 </script>

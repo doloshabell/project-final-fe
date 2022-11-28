@@ -3,7 +3,10 @@
     <div class="flex flex-col mt-4">
       <div class="flex flex-row justify-between mb-10">
         <h1 class="font-semibold text-xl">Detail Customer</h1>
-        <router-link to="/customers/update">
+        <router-link
+          to="/customers/update"
+          v-if="getUserData.hak == 'Head Branch Officer'"
+        >
           <button
             @click="getDataCustomer"
             class="p-2 rounded-md font-normal text-base text-white bg-[#FF8000] hover:bg-[#D06800]"
@@ -89,6 +92,67 @@
             }}
           </h1>
         </div>
+        <div class="mt-5">
+          <div
+            class="bg-[#D1D1D1] border flex flex-col px-6 py-2 rounded-md w-full hover:cursor-pointer"
+          >
+            <div
+              :class="
+                isShowLoans
+                  ? 'flex flex-row justify-between border-b-2 border-[#FAFAFA] pb-1 items-center align-middle mb-7'
+                  : 'flex flex-row justify-between items-center align-middle'
+              "
+              @click="showLoans"
+            >
+              <div class="w-1/3">
+                <h1 class="text-lg font-semibold">Pembiayaan</h1>
+              </div>
+              <div class="text-end w-1/3">
+                <font-awesome-icon
+                  :icon="!isShowLoans ? iconFaChevronDown : iconFaChevronUp"
+                  class="mr-1"
+                />
+              </div>
+            </div>
+            <div v-if="isShowLoans">
+              <div
+                v-for="loan in getDetailCustomerData.pembiayaan"
+                :key="loan.id"
+              >
+                <ListLoans :loan="loan" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 mb-10">
+          <div
+            class="bg-[#FAFAFA] border flex flex-col px-6 py-2 rounded w-full hover:cursor-pointer"
+          >
+            <div
+              :class="
+                isShowSavings
+                  ? 'flex flex-row justify-between border-b-2 border-[#D1D1D1] pb-1 items-center align-middle mb-7'
+                  : 'flex flex-row justify-between items-center align-middle'
+              "
+              @click="showSavings"
+            >
+              <div class="w-1/3">
+                <h1 class="text-lg font-semibold">Tabungan</h1>
+              </div>
+              <div class="text-end w-1/3">
+                <font-awesome-icon
+                  :icon="!isShowSavings ? iconFaChevronDown : iconFaChevronUp"
+                  class="mr-1"
+                />
+              </div>
+            </div>
+            <div v-if="isShowSavings">
+              <div v-for="mutation in getDetailSaving" :key="mutation.id">
+                <ListMutation :mutation="mutation" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -96,11 +160,27 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import ListLoans from "@/components/ListLoans.vue";
+import ListMutation from "@/components/ListMutation.vue";
 
 export default {
   name: "DetailCustomer",
+  components: { ListLoans, ListMutation },
+  data() {
+    return {
+      isShowLoans: false,
+      isShowSavings: false,
+    };
+  },
   computed: {
-    ...mapGetters(["getDetailCustomerData"]),
+    ...mapGetters(["getDetailCustomerData", "getDetailSaving", "getUserData"]),
+    iconFaChevronDown() {
+      return faChevronDown;
+    },
+    iconFaChevronUp() {
+      return faChevronUp;
+    },
   },
   methods: {
     getDataCustomer() {
@@ -116,6 +196,16 @@ export default {
         flagWarungTepat: this.getDetailCustomerData.flagWarungTepat,
         tanggalBuat: this.getDetailCustomerData.tanggalBuat,
       });
+    },
+    showLoans() {
+      !this.isShowLoans
+        ? (this.isShowLoans = true)
+        : (this.isShowLoans = false);
+    },
+    showSavings() {
+      !this.isShowSavings
+        ? (this.isShowSavings = true)
+        : (this.isShowSavings = false);
     },
   },
 };
